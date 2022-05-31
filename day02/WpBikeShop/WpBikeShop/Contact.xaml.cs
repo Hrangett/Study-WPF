@@ -16,30 +16,18 @@ using System.Windows.Shapes;
 namespace WpBikeShop
 {
     /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
+    /// Contact.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Contact : Page
     {
-        public MainWindow()
+        public Contact()
         {
             InitializeComponent();
-
-            InitClass();
         }
 
-        private void InitClass()
+        private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-
-            Human dricer = new Human
-            {
-                Firstname = "Nick",
-                HasDrivingLicense = true
-
-            };
-
-            Car car = new Car();
-            car.Speed = 100;
-            car.Color = Colors.Red;
+            MessageBox.Show("Hell World..");
         }
     }
 }

@@ -12,34 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfBikeShop;
 
 namespace WpBikeShop
 {
     /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
+    /// ProductManagement.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProductManagement : Page
     {
-        public MainWindow()
+        ProductsFactory factory = new ProductsFactory();
+
+        public ProductManagement()
         {
             InitializeComponent();
-
-            InitClass();
         }
 
-        private void InitClass()
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-            Human dricer = new Human
-            {
-                Firstname = "Nick",
-                HasDrivingLicense = true
-
-            };
-
-            Car car = new Car();
-            car.Speed = 100;
-            car.Color = Colors.Red;
+            dgrProduct.ItemsSource = factory.FindProducts(txtSearch.Text);
         }
     }
 }

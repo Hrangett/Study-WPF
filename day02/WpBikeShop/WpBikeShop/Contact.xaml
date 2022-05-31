@@ -22,14 +22,16 @@
                    HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="메시지 "
                    HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,0,0"/>
-        <!--<TextBox Grid.Row="0" Grid.Column="1" Text=" " Margin="10"/>-->
-        <Label Grid.Row="0" Grid.Column="1">
+        <TextBox Grid.Row="0" Grid.Column="1" Text=" " Margin="10"/>
+        
+        <!--<Label Grid.Row="0" Grid.Column="1">
             <local:Car x:Name="car" Speed="100" Color="Tomato">
                 <local:Car.Driver>
                     <local:Human Firstname="Nick" HasDrivingLicense="True"/>
                 </local:Car.Driver>
             </local:Car>
-        </Label>
+        </Label>-->
+        <!--<Button x:Name="btnOK" Content="OK" Grid.Row="0" Grid.Column="1" Click="btnOK_Click"/>-->
         <TextBox Grid.Row="1" Grid.Column="1" Text="Test" Margin="10" TextWrapping="Wrap"
                  AcceptsReturn="True"/>
         

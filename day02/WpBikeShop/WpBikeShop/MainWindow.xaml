@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Frame x:Name="MainFrame" Source="/Contact.xaml"/>
+        <Frame x:Name="MainFrame" Source="/Menu.xaml" NavigationUIVisibility ="Automatic"/>
     </Grid>
 </Window>
