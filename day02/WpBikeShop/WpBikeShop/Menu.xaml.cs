@@ -37,7 +37,7 @@ namespace WpBikeShop
         private void btnLiveSupport_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(
-                new Uri("/Bindings.xaml", UriKind.RelativeOrAbsolute));
+                new Uri("/TemplatePage.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void btnEmailSupport_Click(object sender, RoutedEventArgs e)

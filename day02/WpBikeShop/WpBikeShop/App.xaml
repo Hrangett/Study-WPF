@@ -4,6 +4,29 @@
              xmlns:local="clr-namespace:WpBikeShop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <Style x:Key="niceButton" TargetType="Button">
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush>
+                        <GradientStop Color="Green"/>
+                        <GradientStop Color="Orange" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Rectangle Fill="{TemplateBinding Background}" Stroke="Blue" StrokeThickness="2" RadiusX="10" RadiusY="10"/>
+                            <ContentPresenter
+                                HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
