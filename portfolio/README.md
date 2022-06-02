@@ -3,7 +3,7 @@
 ## Naver 영화검색
 - WPF
   - MahApps.Metro Design
-  -Naver OpenAPI
+  - Naver OpenAPI
   - Youtube OpenAPI
   - Json datahandling
   
