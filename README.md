@@ -24,5 +24,5 @@ C# WPF 학습 repository
 - 네이버 뉴스검색 앱
 
 ##Day 5일차
--MVVM패턴 학습
+- MVVM패턴 학습
 
