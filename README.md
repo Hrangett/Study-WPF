@@ -20,5 +20,7 @@ C# WPF 학습 repository
 - 네이버 영화 앱 만들기([클릭](https://github.com/Hrangett/Study-WPF/tree/main/portfolio))
 
 ##Day 4일차
+  -네이버 영화 앱 마무리
+  -네이버 뉴스검색 앱
 
 
