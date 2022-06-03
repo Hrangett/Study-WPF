@@ -18,7 +18,7 @@
 
 <br/>
 
-  ![YoutubrPlay]
+  ![YoutubrPlay](https://github.com/Hrangett/Study-WPF/blob/main/capture/youtube_trailer.png)
   검색영화 예고편 보기 실행화면
   
   
