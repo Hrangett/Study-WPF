@@ -11,6 +11,7 @@ namespace WpfMvvmApp.Models
     {
         public Person(string firstName, string lastName, string email, DateTime date)
         {
+            //DB접근
             FirstName = firstName;
             LastName = lastName;
             Email = email;
@@ -28,12 +29,11 @@ namespace WpfMvvmApp.Models
             get => email;   //람다식 버전
             set 
             {
-                if (Commons.IsValidEmail(email))
-                {
-                    throw new Exception("Invalid Email...");
-                }
+                if (!Commons.IsValidEmail(value))
+                    throw new Exception("Invalid Email......");
                 else
                     email = value;
+
             }
         }
 
@@ -52,13 +52,13 @@ namespace WpfMvvmApp.Models
 
             }
         }
-        public bool isBirthday { 
+        public bool IsBirthday { 
             get {
                 return DateTime.Now.Month == Date.Month &&
                     DateTime.Now.Day == Date.Day;
             } 
         }
-        public bool isAdult {
+        public bool IsAdult {
             get
             {
                 return Commons.CalcAge(date) > 18;

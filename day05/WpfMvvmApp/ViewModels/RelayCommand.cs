@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WpfMvvmApp.Views
+namespace WpfMvvmApp.ViewModels
 {
     /// <summary>
     /// ViewMode과 View를 Glue하기위한 클래스
