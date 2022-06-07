@@ -21,4 +21,16 @@
   ![YoutubrPlay](https://github.com/Hrangett/Study-WPF/blob/main/capture/youtube_trailer.png)
   검색영화 예고편 보기 실행화면
   
+<br/>
+
+## NAVER 뉴스검색
+- WPF(.NET Framework 4.7.2 / c#)
+  - MahApps.Metro Metro UI/Mordern UI
+  - Newtonsoft.Json
+  - Naver OpenAPI
+
+<br/>
+
+![NaverNewsSearch](https://github.com/Hrangett/Study-WPF/blob/main/capture/naver_news_Search.PNG?raw=true)
+
   
