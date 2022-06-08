@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfNaverMovieFinder", "WpfN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfNaverNewsSearch", "WpfNaverNewsSearch\WpfNaverNewsSearch.csproj", "{5EC79721-8579-41F3-BE65-009F776FABC3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SmartHome", "SmartHome", "{C2CE984D-4034-49C8-8570-86BD41D83341}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyDataApp", "DummyDataApp\DummyDataApp.csproj", "{F6887F88-966C-436A-B1D5-91F85EDA5154}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{5EC79721-8579-41F3-BE65-009F776FABC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EC79721-8579-41F3-BE65-009F776FABC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EC79721-8579-41F3-BE65-009F776FABC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6887F88-966C-436A-B1D5-91F85EDA5154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6887F88-966C-436A-B1D5-91F85EDA5154}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6887F88-966C-436A-B1D5-91F85EDA5154}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6887F88-966C-436A-B1D5-91F85EDA5154}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F6887F88-966C-436A-B1D5-91F85EDA5154} = {C2CE984D-4034-49C8-8570-86BD41D83341}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90F52D66-2C1F-45EC-927D-A6C8950D19C9}
