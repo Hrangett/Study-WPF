@@ -27,6 +27,7 @@ C# WPF 학습 repository
 - MVVM패턴 학습
 
 ## Day 6일차
-- Caliburn.nicro MVVM
+- Caliburn.Micro MVVM
+- Bogus(FakeData, DummyData) 패키지 학습
 - SmartHome 앱 만들기
 
