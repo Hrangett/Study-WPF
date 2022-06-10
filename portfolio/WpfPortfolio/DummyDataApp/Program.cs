@@ -36,7 +36,7 @@ namespace DummyDataApp
         {
             //구성 초기화
             MqttBrokerUrl = "210.119.12.71";
-            var Rooms = new[] { "DINING", "LIVING", "BATH", "BED" };    //부엌,거실,욕실,침실
+            var Rooms = new[] { "DINNING", "LIVING", "BATH", "BED" };    //부엌,거실,욕실,침실
             SensorData = new Faker<SensorInfo>()
                     .RuleFor(o => o.DevId, f => f.PickRandom(Rooms))
                     .RuleFor(r => r.CurrTime, f => f.Date.Past(0))//0을 넣으면 현재시간을 넣을 수 있다
@@ -59,7 +59,7 @@ namespace DummyDataApp
             {
 
                 Console.WriteLine($"접속 불가 :: {ex}");
-                Environment.Exit(5);
+                Environment.Exit(5);    //Error_ACCESS_DENIEN
             }
         }
 
@@ -68,7 +68,43 @@ namespace DummyDataApp
             MqttThread = new Thread(() => LoopPublish());
             MqttThread.Start();
 
+            //Thread thread2 = new Thread(() => LoopPublish2());
+            //thread2.Start();
+
+            //Thread thread3 = new Thread(() => LoopPublish3());
+            //thread3.Start();
+
         }
+
+        //private static void LoopPublish3()
+        //{
+        //    while (true)
+        //    {
+        //        SensorInfo tempValue = SensorData.Generate();
+
+        //        tempValue.DevId = Guid.NewGuid().ToString();    // **newData topic DEVID 변경**
+
+        //        CurrValue = JsonConvert.SerializeObject(tempValue, Formatting.Indented);
+        //        Client.Publish("home/device/newdata22/", Encoding.Default.GetBytes(CurrValue));
+        //        Console.WriteLine($"Publiched newdata22 : {CurrValue}");
+        //        Thread.Sleep(500);
+        //    }
+        //}
+
+        //LoopPulish와 별개로 동작하는 태스크
+        //private static void LoopPublish2()
+        //{
+        //    while (true)
+        //    {
+        //        SensorInfo tempValue = SensorData.Generate();
+        //        tempValue.DevId = Guid.NewGuid().ToString();    //newData topic DEVID 변경
+
+        //        CurrValue = JsonConvert.SerializeObject(tempValue, Formatting.Indented);
+        //        Client.Publish("home/device/newdata/", Encoding.Default.GetBytes(CurrValue));
+        //        Console.WriteLine($"Publiched newdata : {CurrValue}");
+        //        Thread.Sleep(1500);
+        //    }
+        //}
 
         private static void LoopPublish()
         {
@@ -76,8 +112,8 @@ namespace DummyDataApp
             {
                 SensorInfo tempValue = SensorData.Generate();
                 CurrValue = JsonConvert.SerializeObject(tempValue, Formatting.Indented);
-                Client.Publish("home/device/fakedata", Encoding.Default.GetBytes(CurrValue));
-                Console.WriteLine($"Publiched : {CurrValue}");
+                Client.Publish("home/device/fakedata/", Encoding.Default.GetBytes(CurrValue));
+                Console.WriteLine($"Publiched fakedata : {CurrValue}");
                 Thread.Sleep(1000);
             }
 

@@ -1,5 +1,9 @@
 ﻿using Caliburn.Micro;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Text;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
@@ -74,12 +78,18 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
         public DataBaseViewModel()
         {
             BrokerUrl = Commons.BROKERHOST = "127.0.0.1";   //MQTT Broker IP 설정
-            Topic = Commons.PUB_TOPIC = "home/device/fakedata";
+            Topic = Commons.PUB_TOPIC = "home/device/#";
+
+            //Topic = Commons.PUB_TOPIC = "home/+/#"; :
+            //Single Level wildcard : +
+            //Multi Level WildCard : #
+            
             ConnString = Commons.CONNSTRING = "Data Source=PC01;Initial Catalog=OpenApiLab;Integrated Security=True";
 
             if(Commons.IS_CONNECT)
             {
                 IsConnected = true;
+                ConnectDb();
             }
 
         }
@@ -140,10 +150,77 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
             DbLog += $"{message}\n";
         }
 
+        /// <summary>
+        /// Subscribe한 메세지 처리 이벤트 핸들러
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var message = Encoding.UTF8.GetString(e.Message);   //bite형식으로 날라온 글짜 다시 string 형으로 바꿔
-            UpdateText(message);
+            UpdateText(message);    //센서데이터 출력
+            SetDataBase(message,e.Topic);   //DB에 저장
+
+        }
+
+        private void SetDataBase(string message,string topic)
+        {
+            //json -> dictionary
+            var currDatas = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
+            //
+
+            Debug.WriteLine(currDatas);
+
+            using (SqlConnection conn = new SqlConnection(Commons.CONNSTRING))
+            {
+                conn.Open();
+                //verbatim string
+                string strInQuery = @"INSERT INTO TblSmartHome
+                                                    (DevId
+                                                    ,CurrTime
+                                                    ,Temp
+                                                    ,Humid)
+                                                VALUES
+                                                    (@DevId
+                                                    ,@CurrTime
+                                                    ,@Temp
+                                                    ,@Humid)";
+
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(strInQuery, conn);
+
+                    SqlParameter parmDevId = new SqlParameter("@DevId", currDatas["DevId"]);
+                    cmd.Parameters.Add(parmDevId);
+
+                    SqlParameter parCurrTime = new SqlParameter("@CurrTime", DateTime.Parse(currDatas["CurrTime"]));    //날짜형으로 변환 필요
+                    cmd.Parameters.Add(parCurrTime);
+
+                    SqlParameter parTemp = new SqlParameter("@Temp", currDatas["Temp"]);
+                    cmd.Parameters.Add(parTemp);
+
+                    SqlParameter parHumid = new SqlParameter("@Humid", currDatas["Humid"]);
+                    cmd.Parameters.Add(parHumid);
+
+                    if(cmd.ExecuteNonQuery() == 1)  //영향을 받은 행 수 반환
+                    {
+                        UpdateText(">>> DB Inserted");
+                    }
+                    else
+                    {
+                        UpdateText(">>> !!!!!!! DB Failed !!!!!!");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    UpdateText($">>> DB Error :: {ex.Message}");
+                    
+                }
+
+            }//using(){} 은 conn.Close(); 필요 없음
+
 
         }
     }
