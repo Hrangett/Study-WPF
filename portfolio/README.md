@@ -36,10 +36,12 @@
 <br/>
 
 ## SmartHome 모니터링
+[이전](https://github.com/Hrangett/Study-WPF)
 - WPF (.NET Framwork 4.7.2/C#)
   - MahApps.Metro
   - Caliburn.Micro
   - LiveCharts
+  - OxyPlot.Wpf
   - M2Mqtt
   - Newtonsoft.Json
   - SQLServer DB
@@ -48,6 +50,11 @@
 
 ![SmartHome](https://github.com/Hrangett/Study-WPF/blob/main/capture/Smart_Home_DBmonitoring.png?raw=true)
 
+DB 모니터링 화면
+
+![RealTimeView](https://raw.githubusercontent.com/Hrangett/Study-WPF/main/capture/RealTimeViewMonitoring.png)
+
+![HistoryView](https://raw.githubusercontent.com/Hrangett/Study-WPF/main/capture/HistoryView.png)
 
 
   
