@@ -21,7 +21,7 @@
                         <MenuItem.Icon>
                             <iconPacks:MaterialDesign Kind="AttachFile" />
                         </MenuItem.Icon>
-                        <MenuItem Header="Start">
+                        <MenuItem x:Name="PopInfoDialog" Header="Start">
                             <MenuItem.Icon>
                                 <iconPacks:MaterialDesign Kind="PlayCircleFilled" />
                             </MenuItem.Icon>

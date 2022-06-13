@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using OxyPlot;
+using OxyPlot.Legends;
+using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using WpfSmartHomeMonitoringApp.Helpers;
 using WpfSmartHomeMonitoringApp.Models;
 
 namespace WpfSmartHomeMonitoringApp.ViewModels
 {
-    //SmartHomeModel
+    //HistoryModel
     //    SearchIoTData()
     //    TotalCount
     //    InitEndDate
@@ -33,7 +36,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
         private string initEndDate;
         private string endDate;
         private int totalCount;
-        private PlotModel smartHomeModel;
+        private PlotModel historyModel; //OxyPlot : 220613, LEU smartHomeModel -> historyModel 변경
 
         public string StartDate
         {
@@ -72,13 +75,13 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                 NotifyOfPropertyChange(() => TotalCount);
             }
         }
-        public PlotModel SmartHomeModel
+        public PlotModel HistoryModel   //OxyPlot : 220613, LEU smartHomeModel -> historyModel 변경
         {
-            get => smartHomeModel;
+            get => historyModel;
             set
             {
-                smartHomeModel = value;
-                NotifyOfPropertyChange(() => SmartHomeModel);
+                historyModel = value;
+                NotifyOfPropertyChange(() => HistoryModel);
             }
         }
         public BindableCollection<DivisionModel> Divisions
@@ -179,18 +182,62 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     var i = 0;
-                    while(reader.Read())
+
+                    //start of shart process 
+                    var tmp = new PlotModel
                     {
-                        var temp = reader["Temp"];
+                        Title = $"{ SelectedDivision.DivisionVal }Histories",
+                        Subtitle = "using OxyPlot"
+                    };   //임시 플롯 모델
+
+                    //범례 : OxyPlot.Wpf >> LEgendsDemo 참조
+                    var l = new Legend
+                    {
+                        LegendBorder = OxyColors.Black,
+                        LegendBackground = OxyColor.FromAColor(200, OxyColors.White),
+                        LegendPosition = LegendPosition.RightTop,
+                        LegendPlacement = LegendPlacement.Inside
+
+                    };
+
+                    var seriesTemp = new LineSeries
+                    {
+                        Color = OxyColor.FromRgb(205, 100, 0),
+                        Title = "Temperature",
+                        MarkerSize = 4,
+                        MarkerType = MarkerType.Circle
+                    };  //온도값을 라인차트로 담을 객체
+
+                    LineSeries seriesHumid = new LineSeries
+                    {
+                        Color = OxyColor.FromRgb(150,150,255),
+                        Title = "Humidity",
+                        MarkerType = MarkerType.Triangle
+                    };
+
+
+                    while (reader.Read())
+                    {
+
+                        //var temp = reader["Temp"];
                         //Temp, Humid 차트 데이터 생성
+                        
+                        seriesTemp.Points.Add(new DataPoint(i, Convert.ToDouble(reader["Temp"])));    //DataPoint(x,y)
+                        seriesHumid.Points.Add(new DataPoint(i, Convert.ToDouble(reader["Humid"])));    //DataPoint(x,y)
+
                         i++;
                     }
 
-                    TotalCount = i;
+                    TotalCount = i; //검색한 데이터의 총 갯수
+
+                    tmp.Series.Add(seriesTemp);
+                    tmp.Series.Add(seriesHumid);
+                    HistoryModel = tmp;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Error {ex.Message}");
+                    return;
 
                 }
             }

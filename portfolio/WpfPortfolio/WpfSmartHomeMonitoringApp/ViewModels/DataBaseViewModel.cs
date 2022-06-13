@@ -8,6 +8,7 @@ using System.Text;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using WpfSmartHomeMonitoringApp.Helpers;
+using WpfSmartHomeMonitoringApp.Models;
 
 namespace WpfSmartHomeMonitoringApp.ViewModels
 {
@@ -167,7 +168,12 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
         {
             //json -> dictionary
             var currDatas = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
-            //
+
+            var smartHomeModel = new SmartHomeModel();
+            smartHomeModel.DevId = currDatas["DevId"];
+            smartHomeModel.CurrTime = DateTime.Parse(currDatas["CurrTime"]);
+            smartHomeModel.Temp = double.Parse(currDatas["Temp"]);
+            smartHomeModel.Humid = double.Parse(currDatas["Humid"]);
 
             Debug.WriteLine(currDatas);
 
@@ -190,16 +196,16 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                 {
                     SqlCommand cmd = new SqlCommand(strInQuery, conn);
 
-                    SqlParameter parmDevId = new SqlParameter("@DevId", currDatas["DevId"]);
+                    SqlParameter parmDevId = new SqlParameter("@DevId", smartHomeModel.DevId);
                     cmd.Parameters.Add(parmDevId);
 
-                    SqlParameter parCurrTime = new SqlParameter("@CurrTime", DateTime.Parse(currDatas["CurrTime"]));    //날짜형으로 변환 필요
+                    SqlParameter parCurrTime = new SqlParameter("@CurrTime", smartHomeModel.CurrTime);    //날짜형으로 변환 필요
                     cmd.Parameters.Add(parCurrTime);
 
-                    SqlParameter parTemp = new SqlParameter("@Temp", currDatas["Temp"]);
+                    SqlParameter parTemp = new SqlParameter("@Temp", smartHomeModel.Temp);
                     cmd.Parameters.Add(parTemp);
 
-                    SqlParameter parHumid = new SqlParameter("@Humid", currDatas["Humid"]);
+                    SqlParameter parHumid = new SqlParameter("@Humid", smartHomeModel.Humid);
                     cmd.Parameters.Add(parHumid);
 
                     if(cmd.ExecuteNonQuery() == 1)  //영향을 받은 행 수 반환
