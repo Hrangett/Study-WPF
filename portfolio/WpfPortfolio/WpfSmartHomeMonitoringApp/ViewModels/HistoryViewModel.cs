@@ -186,7 +186,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                     //start of shart process 
                     var tmp = new PlotModel
                     {
-                        Title = $"{ SelectedDivision.DivisionVal }Histories",
+                        Title = $"{ SelectedDivision.DivisionVal } Histories",
                         Subtitle = "using OxyPlot"
                     };   //임시 플롯 모델
 
@@ -199,7 +199,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                         LegendPlacement = LegendPlacement.Inside
 
                     };
-
+                    tmp.Legends.Add(l);
                     var seriesTemp = new LineSeries
                     {
                         Color = OxyColor.FromRgb(205, 100, 0),

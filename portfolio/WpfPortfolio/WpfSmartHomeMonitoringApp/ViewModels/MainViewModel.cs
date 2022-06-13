@@ -50,11 +50,43 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
             Environment.Exit(0);    //프로그램 종료
         }
 
+        public void ExitToolbar()
+        {
+            Environment.Exit(0);
+        }
+
         //  Start메뉴, 아이콘 눌렀을 때 처리할 이벤트
         public void PopInfoDialog()
         {
-            //  CustomPopupView
+            TaskPopup();
+        }
 
+        public void StartSubscribe ()
+        {
+            TaskPopup();
+        }
+
+        private void TaskPopup()
+        {
+            //  CustomPopupView
+            //  화면 전환
+            //  한번이상 반복되면 무조건 메소드로 빼라
+
+            var winManager = new WindowManager();
+            var result = winManager.ShowDialogAsync(new CustomPopupViewModel("New Broker"));
+
+            if (result.Result == true)
+            {
+                ActivateItemAsync(new DataBaseViewModel());//화면전환
+            }
+        }
+
+        
+        public void PopInfoView()
+        {
+            var winManager = new WindowManager();
+            winManager.ShowDialogAsync(new CustomInfoViewModel("About"));
         }
     }
+   
 }

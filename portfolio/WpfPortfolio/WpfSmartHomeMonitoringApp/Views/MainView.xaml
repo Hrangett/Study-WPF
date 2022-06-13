@@ -62,7 +62,7 @@
                         </MenuItem>
                     </MenuItem>
 
-                    <MenuItem Header="_Help">
+                    <MenuItem x:Name="PopInfoView" Header="_Help">
                         <MenuItem.Icon>
                             <iconPacks:MaterialDesign Kind="Help" />
                         </MenuItem.Icon>
@@ -79,14 +79,14 @@
 
                 <ToolBarTray>
                     <ToolBar Style="{StaticResource MahApps.Styles.ToolBar}">
-                        <Button ToolTip="Start MQTT Subscriber">
+                        <Button x:Name="StartSubscribe" ToolTip="Start MQTT Subscriber">
                             <iconPacks:MaterialDesign Kind="PlayCircleFilled"/>
                         </Button>
                         <Button ToolTip="Stop MQTT Subscriber">
                             <iconPacks:MaterialDesign Kind="PauseCircleFilled"/>
                         </Button>
                         <Separator/>
-                        <Button ToolTip="Exit">
+                        <Button x:Name="ExitToolbar" ToolTip="Exit">
                             <iconPacks:MaterialDesign Kind="ExitToApp"/>
                         </Button>
 
